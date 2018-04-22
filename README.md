@@ -27,6 +27,4 @@ npm run e2e
 npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-#项目的开始，先梳理好项目的结构，[点击查看详情](https://searworld.gitbooks.io/vux/content/fen-xi-xiang-mu-gong-cheng-jie-gou.html)
+项目的开始，先梳理好项目的结构，[点击查看详情](https://searworld.gitbooks.io/vux/content/fen-xi-xiang-mu-gong-cheng-jie-gou.html)
