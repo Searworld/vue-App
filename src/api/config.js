@@ -4,7 +4,8 @@ export const configParams = {
   inCharset: 'utf-8',
   outCharset: 'utf-8',
   format: 'json',
-  notice: 0
+  notice: 0,
+  needNewCode: 1
 }
 
 export const options = {

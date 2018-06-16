@@ -5,7 +5,6 @@ export default function getSliderList () {
   const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
   const data = Object.assign({}, configParams, {
     platform: 'h5',
-    needNewCode: 1,
     _: 1528994466401
   })
   return jsonp(url, data, options)

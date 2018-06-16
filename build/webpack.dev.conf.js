@@ -10,12 +10,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+
+
+const axios = require('axios')
+const express = require('express')
+const app = express() //请求server
+const apiRoutes = express.Router()
+app.use('/', apiRoutes)
+
+
+
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -25,7 +36,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+        {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html')},
       ],
     },
     hot: true,
@@ -35,13 +46,25 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
+      ? {warnings: false, errors: true}
       : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before (app) {
+      app.get('/getRankings', (req, res) => {
+        const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg'
+        axios.get(url, {
+          params: req.query
+        }).then((response)=>{
+          res.json(response.data)
+        }).catch((e)=>{
+          console.log(e)
+        })
+      })
     }
   },
   plugins: [
@@ -85,11 +108,12 @@ module.exports = new Promise((resolve, reject) => {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined
       }))
 
       resolve(devWebpackConfig)
     }
   })
 })
+
