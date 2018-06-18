@@ -34,9 +34,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'src': resolve('src')
-      // 'vue$': 'vue/dist/vue.esm.js',
-      // '@': resolve('src'),
+      'src': resolve('src'),
+      'api': resolve('src/api'),
+      'js': resolve('src/js'),
+      'components': resolve('src/components'),
+      'common': resolve('src/common'),
+      'styles': resolve('src/styles')
     }
   },
   module: {
@@ -59,6 +62,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
+
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,

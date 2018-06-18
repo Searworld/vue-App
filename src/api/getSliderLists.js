@@ -1,4 +1,4 @@
-import jsonp from '../js/jsonp'
+import jsonp from 'js/jsonp'
 import { configParams, options } from './config'
 
 export default function getSliderList () {

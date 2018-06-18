@@ -10,16 +10,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
-
-
 const axios = require('axios')
 const express = require('express')
 const app = express() //请求server
 const apiRoutes = express.Router()
 app.use('/', apiRoutes)
-
-
-
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -59,9 +54,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg'
         axios.get(url, {
           params: req.query
-        }).then((response)=>{
+        }).then((response) => {
           res.json(response.data)
-        }).catch((e)=>{
+        }).catch((e) => {
+          console.log(e)
+        })
+      })
+      app.get('/getRecommendList', (req, res) => {
+        const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
+        axios.get(url, {
+          headers: {
+            referer: 'https://y.qq.com/portal/playlist.html'
+          },
+          params: req.query
+        }).then((response) => {
+          res.json(response.data)
+        }).catch((e) => {
           console.log(e)
         })
       })

@@ -2,8 +2,8 @@
   <div></div>
 </template>
 <script>
-  import getRankings from '../../api/getRankings'
-  import { ERR_OK } from '../../api/config'
+  import getRankings from 'api/getRankings'
+  import { ERR_OK } from 'api/config'
 
   export default {
     methods: {
